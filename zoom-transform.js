@@ -135,6 +135,17 @@ function contains(box, point){
 		&& point.y <= box.y + box.height;
 }
 
+
+function boxIntersect(r1, r2){
+  // return (Math.abs(a.x - b.x) * 2 < (a.width + b.width)) &&
+  //        (Math.abs(a.y - b.y) * 2 < (a.height + b.height));
+
+  return !(r2.x > r1.x + r1.width
+        || r2.x + r2.width < r1.x
+        || r2.y > r1.y + r1.height
+        || r2.y + r2.height < r1.y)
+}
+
 var lasttick
 function tick(t){
 	requestAnimationFrame(tick)
@@ -149,6 +160,13 @@ function tick(t){
 
 	if(mouse.focus) mouse.focus.color = 'rgba(255,0,0,0.2)'
 
+	var visibleBoxes = 0;
+	var viewport = {
+		x: worldX(100),
+		y: worldY(100),
+		width: innerWidth / zoom * 2 - 200,
+		height: innerHeight / zoom * 2 - 200
+	}
 	for (var i = boxes.length - 1; i >= 0; i--) {
 		drawBox(boxes[i])
 		// boxes[i].color = 'rgba(0,0,0,0.8)'
@@ -162,7 +180,16 @@ function tick(t){
 
 		boxes[i].x = boxes[i].x * damp + newX * (1- damp);
 		boxes[i].y = boxes[i].y * damp + newY * (1- damp);
+
+		if(boxIntersect(boxes[i], viewport)) visibleBoxes++;
 	}
+
+	// console.log(visibleBoxes)
+	if(visibleBoxes == 0){
+		zoom *= 0.95
+	}
+
+
 
 	snapOffset(.8)
 	updateMouse()
