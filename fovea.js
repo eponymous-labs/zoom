@@ -168,7 +168,7 @@ function tick(t){
 	for(var i = 0; i < 2000; i+=50){
 		ctx.beginPath()
 		// ctx.moveTo(...distort(i, 0))
-		for(var j = 0; j < 2000; j+=50){
+		for(var j = 0; j < 2000-25; j+=25){
 			ctx.lineTo(...distort(i, j))
 		}
 		ctx.stroke()
@@ -180,7 +180,7 @@ function tick(t){
 	for(var j = 0; j < 2000; j+=50){
 		// ctx.moveTo(...distort(0, j))
 		ctx.beginPath()
-		for(var i = 0; i < 2000; i+=50){	
+		for(var i = 0; i < 2000-25; i+=25){	
 			ctx.lineTo(...distort(i, j))
 		}
 		ctx.stroke()
