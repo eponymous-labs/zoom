@@ -181,13 +181,13 @@ function tick(t){
 		boxes[i].x = boxes[i].x * damp + newX * (1- damp);
 		boxes[i].y = boxes[i].y * damp + newY * (1- damp);
 
-		if(boxIntersect(boxes[i], viewport)) visibleBoxes++;
+		// if(boxIntersect(boxes[i], viewport)) visibleBoxes++;
 	}
 
 	// console.log(visibleBoxes)
-	if(visibleBoxes == 0){
-		zoom *= 0.95
-	}
+	// if(visibleBoxes == 0){
+	// 	zoom *= 0.95
+	// }
 
 
 
