@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Zoom</title>
+	<style>
+	body, html {
+		margin: 0;
+	}
+
+
+text {
+  font: 10px sans-serif;
+}
+
+.background {
+  fill: none;
+  pointer-events: all;
+}
+
+#chart1 .node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+#chart1 .link {
+  stroke: #999;
+  stroke-opacity: .6;
+  stroke-width: 1.5px;
+}
+
+
+#chart1 path{
+  fill: none;
+  stroke: #eee;
+}
+
+	</style>
+</head>
+<body>
+<div id="chart1"></div>
+<script src="./d3.js" charset="utf-8"></script>
+<script src="./fisheye-linear.js" charset="utf-8"></script>
+<script src="./miserables.js"></script>
+<script type="text/javascript" src="./fovea-graph.js"></script>
+
+</body>
+</html>

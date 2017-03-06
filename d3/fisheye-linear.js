@@ -12,14 +12,32 @@
           focus = [0, 0];
 
       function fisheye(d) {
-
-        if(distortion == 0) return { x: d.x, y: d.y, z: 1 };
         var dx = (d.x - focus[0])/aspectRatio,
             dy = d.y - focus[1],
-            dd = Math.sqrt(dx * dx + dy * dy);
-        if (!dd || dd >= radius) return {x: d.x, y: d.y, z: 1};
-        var k = k0 * (1 - Math.exp(-dd * k1)) / dd * .75 + .25;
-        return {x: focus[0] + dx * k * aspectRatio, y: focus[1] + dy * k, z: Math.min(k, 10)};
+            dd = Math.sqrt(dx * dx + dy * dy),
+            th = Math.atan2(dy, dx);
+
+        var rad = 50;
+        if(distortion <= 0){
+          var r = dd * (distortion + 1);
+        }else{
+          var r = (dd < rad) ? (dd * (distortion+1)) : (rad*(distortion+1)+dd-rad)  
+        }
+
+        return {
+          x: r * Math.cos(th) * aspectRatio + focus[0],
+          y: r * Math.sin(th) + focus[1],
+          z: r/dd
+        }
+
+
+        // if(distortion == 0) return { x: d.x, y: d.y, z: 1 };
+        // var dx = (d.x - focus[0])/aspectRatio,
+        //     dy = d.y - focus[1],
+        //     dd = Math.sqrt(dx * dx + dy * dy);
+        // if (!dd || dd >= radius) return {x: d.x, y: d.y, z: 1};
+        // var k = k0 * (1 - Math.exp(-dd * k1)) / dd * .75 + .25;
+        // return {x: focus[0] + dx * k * aspectRatio, y: focus[1] + dy * k, z: Math.min(k, 10)};
       }
 
       function rescale() {
